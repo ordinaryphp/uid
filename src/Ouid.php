@@ -55,7 +55,7 @@ final class Ouid implements OuidInterface
      */
     public string $namespace {
         get {
-            if (!isset($this->cachedNamespace)) {
+            if ($this->cachedNamespace === null) {
                 $this->parseOuid();
             }
 
@@ -68,7 +68,7 @@ final class Ouid implements OuidInterface
      */
     public DateTimeImmutable $datetime {
         get {
-            if (!isset($this->cachedDatetime)) {
+            if (!$this->cachedDatetime instanceof \DateTimeImmutable) {
                 $this->parseOuid();
             }
 
@@ -81,7 +81,7 @@ final class Ouid implements OuidInterface
      */
     public string $randomBytes {
         get {
-            if (!isset($this->cachedRandomBytes)) {
+            if ($this->cachedRandomBytes === null) {
                 $this->parseOuid();
             }
 
@@ -91,7 +91,9 @@ final class Ouid implements OuidInterface
 
     /** @var non-empty-string|null */
     private ?string $cachedNamespace = null;
+
     private ?DateTimeImmutable $cachedDatetime = null;
+
     /** @var non-empty-string|null */
     private ?string $cachedRandomBytes = null;
 
